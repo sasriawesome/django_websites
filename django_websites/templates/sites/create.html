@@ -1,0 +1,22 @@
+{% extends 'sites/base.html' %}
+{% load i18n %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="#">Home</a></li>
+<li class="breadcrumb-item"><a href="{% url 'account_manage' %}">{% trans 'Account' %}</a></li>
+<li class="breadcrumb-item"><a href="{{ view.index_url }}">{{ opts.verbose_name }}</a></li>
+<li class="breadcrumb-item active">{% trans 'Create new' %}</li>
+{% endblock %}
+
+{% block content_main %}
+
+  <div class="border bg-white p-5">
+    <h2 class="mb-5">{% trans 'Create new' %} {{ opts.verbose_name }}</h2>
+    <form action="" method="post">
+      {% csrf_token %}
+      {% include 'sites/includes/fieldset.html' %}
+      <input type="submit" class="btn btn-primary mr-2" value="{% trans 'Save' %}"/>
+    </form>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'sites/base.html' %}
+{% load i18n %}
+
+{% block content_main %}
+
+<div class="border bg-white p-5">
+  <h3>{% trans 'Are you sure ?' %}</h3>
+  {% blocktrans with view.modelsite.opts as meta %}
+  Are you sure you want to delete the selected {{ meta.model_name }}? All of the following objects and their related items will be deleted.
+  {% endblocktrans %}
+  <form action="" method="post">
+    {% csrf_token %}
+    {% include 'sites/includes/fieldset.html' %}
+    <input type="submit" class="btn btn-primary mr-2" value="{% trans 'Confirm Deletion' %}"/>
+  </form>
+</div>
+
+{% endblock %}

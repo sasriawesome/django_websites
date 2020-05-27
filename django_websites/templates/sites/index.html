@@ -1,0 +1,19 @@
+{% extends 'sites/base.html' %}
+{% load i18n %}
+
+{% block content_main %}
+  
+  {{ page_title }}
+  {% if object_list %}
+    {% include 'sites/includes/results.html' %}
+    {% include 'sites/includes/pagination.html' %}
+  {% else %}
+    <p>{% trans 'There is no ' %} {{ opts.verbose_name }} <a href="{% url view.urls.create_url_name %}">Create</a> </p>
+  {% endif %}
+{% endblock %}
+
+{% block content_sidebar %}
+  {% if filter %}
+    {% include 'sites/includes/filter.html' %}
+  {% endif %}
+{% endblock %}

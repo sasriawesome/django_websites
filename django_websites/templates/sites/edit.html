@@ -1,0 +1,14 @@
+{% extends 'sites/base.html' %}
+{% load i18n %}
+
+{% block content_main %}
+
+  <div class="border bg-white p-5">
+    <form action="" method="post">
+      {% csrf_token %}
+      {% include 'sites/includes/fieldset.html' %}
+      <input type="submit" class="btn btn-primary mr-2" value="{% trans 'Update' %}"/>
+    </form>
+  </div>
+
+{% endblock %}

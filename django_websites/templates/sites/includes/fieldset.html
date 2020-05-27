@@ -1,0 +1,67 @@
+{% load formutils_tags widget_tweaks %}
+
+<div class="form-section mb-5">
+  {% for field in form %}
+    <div class="form-group row">
+      <label for="{{ field.name }}" class="col-sm-3 col-form-label">
+        {{ field.label }}{% if field.field.required %} <sup class="text-danger">*</sup>{% endif %}
+      </label>
+      <div class="col-sm-6">
+        {% if field|is_checkbox %}
+          <div class="form-check form-check-inline" style="padding-top: calc(.375rem + 1px);">
+            {% render_field field class='form-check-input' %}
+            <label class="form-check-label small" for="{{ field.name }}">
+              {{ field.label }}
+            </label>
+          </div>
+        {% else %}
+          {% render_field field class='form-control' %}
+        {% endif %}
+        <small class="form-text text-muted">{{ field.help_text }}</small>
+        {{ field.errors }}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{##}
+{##}
+{#<div class="form-check form-check-inline">#}
+{#  {% render_field form.show_title class='form-check-input' %}#}
+
+{#</div>#}
+{##}
+{#<div class="form-check form-check-inline">#}
+{#  {% render_field form.show_academic_title class='form-check-input' %}#}
+{#  <label class="form-check-label small" for="{{ form.show_academic_title.name }}">#}
+{#    {{ form.show_academic_title.label }}#}
+{#  </label>#}
+{#</div>#}
+{##}
+{##}
+{#<div class="form-row{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% if not line.has_visible_field %} hidden{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">#}
+{#  {% if line.fields|length_is:'1' %}{{ line.errors }}{% endif %}#}
+{#  {% for field in line %}#}
+{#    <div#}
+{#        {% if not line.fields|length_is:'1' %} class="fieldBox{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if not field.is_readonly and field.errors %} errors{% endif %}#}
+{#{% if field.field.is_hidden %} hidden{% endif %}"{% elif field.is_checkbox %} class="checkbox-row"{% endif %}>#}
+{#      {% if not line.fields|length_is:'1' and not field.is_readonly %}{% endif %}#}
+{##}
+{#      {% if field.is_checkbox %}#}
+{#        {{ field.field }}{{ field.label_tag }}#}
+{#      {% else %}#}
+{#        {{ field.label_tag }}#}
+{#        {% if field.is_readonly %}#}
+{#          <div class="readonly">{{ field.contents }}</div>#}
+{#        {% else %}#}
+{#          {{ field.field }}#}
+{#        {% endif %}#}
+{#      {% endif %}#}
+{##}
+{#      {% if field.field.help_text %}#}
+{#        <div class="help">{{ field.field.help_text|safe }}</div>#}
+{#      {% endif %}#}
+{##}
+{#    </div>#}
+{#  {% endfor %}#}
+{#</div>#}

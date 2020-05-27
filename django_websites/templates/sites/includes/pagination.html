@@ -1,0 +1,38 @@
+{% load pagination_tags %}
+
+{% if is_paginated %}
+  <ul class="pagination mt-3">
+    {% if page_obj.number == 1 %}
+      <li class="page-item disabled"><span class="page-link">&laquo;&laquo;</span></li>
+    {% else %}
+      <li class="page-item"><a class="page-link" href="?{% replace_param page=1 %}">&laquo;&laquo;</a></li>
+    {% endif %}
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?{% replace_param page=page_obj.previous_page_number %}">&laquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator|proper_paginate:page_obj.number %}
+      {% if page_obj.number == i %}
+        <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?{% replace_param page=i %}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?{% replace_param page=page_obj.next_page_number %}">&raquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+    {% endif %}
+    {% if page_obj.number == paginator.num_pages %}
+      <li class="page-item disabled"><span class="page-link">&raquo;&raquo;</span></li>
+    {% else %}
+      <li class="page-item">
+        <a class="page-link" href="?{% replace_param page=paginator.num_pages %}">&raquo;&raquo;</a>
+      </li>
+    {% endif %}
+  </ul>
+{% endif %}
