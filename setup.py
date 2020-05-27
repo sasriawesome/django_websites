@@ -28,9 +28,7 @@ setup(
         'django_websites.templatetags',
         'django_websites.utils',
     ],
-    package_data=[
-        'django_websites/templates/*'
-    ]
+    include_package_data = True,
     install_requires=[
         'Django>=2.2',
     ],
